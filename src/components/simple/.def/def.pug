@@ -1,0 +1,17 @@
+mixin def(options = {}, items = [])
+  -
+    const items = (options.items || []).concat(items);
+    delete options.items;
+
+    options.class = `def `.concat(options.class || '');
+    const mod = ((mod = '')=> new Set( mod.trim().split(/[,\s]\s*/) ))(options.mod)
+    delete options.mod;
+    // if (mod.includes('dropable'))
+    const text = options.text ? `${options.text}` : '';
+    delete options.text;
+    const title = options.title ? `${options.title}` : '';
+    delete options.title;
+
+    options.class += mod.length ? ` def-${mod.join(` def-`)} ` : '';
+
+  div()&attributes(options)&attributes(attributes)
