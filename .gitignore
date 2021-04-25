@@ -4,6 +4,7 @@ src/pages/**/import.*
 !src/pages/**/import.json
 gh-pages/
 gh-pages/*
+desktop.ini
 # temp component folders
 git-bash.lnk
 package-lock.json
