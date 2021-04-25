@@ -1,9 +1,9 @@
 mixin demo_block(options = {}, items = [])
   -
-    const items = (options.items || []).concat(items);
+    items = items.concat(options.items);
     delete options.items;
+    options.class = options.class || ''
 
-    options.class = `demo_block `.concat(options.class || '');
     const mod = ((mod = '')=> new Set( mod.trim().split(/[,\s]\s*/) ))(options.mod)
     delete options.mod;
     // if (mod.includes('dropable'))
@@ -12,8 +12,8 @@ mixin demo_block(options = {}, items = [])
     const title = options.title ? `${options.title}` : '';
     delete options.title;
 
-    options.class += mod.length ? ` demo_block-${mod.join(` demo_block-`)} ` : '';
+    options.class += ' demo_block' + (mod.length ? ` demo_block-${mod.join(` demo_block-`)} ` : '');
 
-  .demo_block()&attributes(options)&attributes(attributes)
+  div()&attributes(options)&attributes(attributes)
     .demo_block__item.controls
-    +slider()
+    +slider({ class: 'demo_block__item' })

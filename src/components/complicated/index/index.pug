@@ -1,24 +1,24 @@
-append mixins
-  mixin index(options = {}, items = [])
-    -
-      const items = (options.items || []).concat(items);
-      delete options.items;
 
-      options.class = `index `.concat(options.class || '');
-      const mod = ((mod = '')=> new Set( mod.trim().split(/[,\s]\s*/) ))(options.mod)
-      delete options.mod;
-      // if (mod.includes('dropable'))
-      const text = options.text ? `${options.text}` : 'add new slider';
-      delete options.text;
-      const title = options.title ? `${options.title}` : '';
-      delete options.title;
+mixin index(options = {}, items = [])
+  -
+    items = items.concat(options.items);
+    delete options.items;
+    options.class = options.class || ''
 
-      options.class += mod.length ? ` index-${mod.join(` index-`)} ` : '';
+    const mod = ((mod = '')=> new Set( mod.trim().split(/[,\s]\s*/) ))(options.mod)
+    delete options.mod;
+    // if (mod.includes('dropable'))
+    const text = options.text ? `${options.text}` : 'add new slider';
+    delete options.text;
+    const title = options.title ? `${options.title}` : '';
+    delete options.title;
 
-    .index.index__js()&attributes(options)&attributes(attributes)
-      .index__list_demo
-      .index__control
-        button(type="button").index__button.index__button--add_template ksduahkasd
-      template.index__template
-        //- +demo_block()
+    options.class += ' index index__js' + (mod.length ? ` index-${mod.join(` index-`)} ` : '');
+
+  div()&attributes(options)&attributes(attributes)
+    .index__list_demo
+    .index__control
+      button(type="button").index__button.index__button--add_template ksduahkasd
+    template.index__template
+      +demo_block()
 

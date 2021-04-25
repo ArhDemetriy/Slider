@@ -1,9 +1,9 @@
 mixin slider(options = {}, items = [])
   -
-    const items = (options.items || []).concat(items);
+    items = items.concat(options.items);
     delete options.items;
+    options.class = options.class || ''
 
-    options.class = `slider `.concat(options.class || '');
     const mod = ((mod = '')=> new Set( mod.trim().split(/[,\s]\s*/) ))(options.mod)
     delete options.mod;
     // if (mod.includes('dropable'))
@@ -12,6 +12,6 @@ mixin slider(options = {}, items = [])
     const title = options.title ? `${options.title}` : '';
     delete options.title;
 
-    options.class += mod.length ? ` slider-${mod.join(` slider-`)} ` : '';
+    options.class += ' slider' + (mod.length ? ` slider-${mod.join(` slider-`)} ` : '');
 
-  .slider()&attributes(options)&attributes(attributes)
+  div()&attributes(options)&attributes(attributes)

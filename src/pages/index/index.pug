@@ -1,12 +1,7 @@
 extends /../layouts/base.pug
-include ./imports.pug
-
 append mixins
-  mixin qwe()
-    span qwe
+  include ./imports.pug
 block title
   title='Slider demo'
 append main
-  +qwe()
-  +qwe()
   +index()
