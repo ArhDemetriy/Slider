@@ -298,6 +298,11 @@ class WebpackConfig {
     if (serve || watch) {
       options.cleanStaleWebpackAssets = false;
     }
+    options.cleanOnceBeforeBuildPatterns = [
+      '**/*',
+      '!.git',
+      '!.git/**/*',
+    ];
 
     return new CleanWebpackPlugin(options);
   }
