@@ -4,9 +4,11 @@ append mixins
 block title
   title='Slider demo'
 append main
-  .index
+  .index.index__js
     .index__list_demo
     .index__control
+      - const text = 'add new slider'
+      button.index__button.index__button--add_template=text
     template.index__template
       .demo_block
         .controls
