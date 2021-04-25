@@ -1,7 +1,0 @@
-{
-  "compilerOptions": {
-    "lib": ["es2020","ESNext","DOM"],
-    "downlevelIteration": true,
-  },
-  "exclude": ["node_modules/*"]
-}
