@@ -1,0 +1,19 @@
+mixin demo_block(options = {}, items = [])
+  -
+    const items = (options.items || []).concat(items);
+    delete options.items;
+
+    options.class = `demo_block `.concat(options.class || '');
+    const mod = ((mod = '')=> new Set( mod.trim().split(/[,\s]\s*/) ))(options.mod)
+    delete options.mod;
+    // if (mod.includes('dropable'))
+    const text = options.text ? `${options.text}` : '';
+    delete options.text;
+    const title = options.title ? `${options.title}` : '';
+    delete options.title;
+
+    options.class += mod.length ? ` demo_block-${mod.join(` demo_block-`)} ` : '';
+
+  .demo_block()&attributes(options)&attributes(attributes)
+    .demo_block__item.controls
+    .demo_block__item.slider

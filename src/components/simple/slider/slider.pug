@@ -1,0 +1,17 @@
+mixin slider(options = {}, items = [])
+  -
+    const items = (options.items || []).concat(items);
+    delete options.items;
+
+    options.class = `slider `.concat(options.class || '');
+    const mod = ((mod = '')=> new Set( mod.trim().split(/[,\s]\s*/) ))(options.mod)
+    delete options.mod;
+    // if (mod.includes('dropable'))
+    const text = options.text ? `${options.text}` : '';
+    delete options.text;
+    const title = options.title ? `${options.title}` : '';
+    delete options.title;
+
+    options.class += mod.length ? ` slider-${mod.join(` slider-`)} ` : '';
+
+  div()&attributes(options)&attributes(attributes)
