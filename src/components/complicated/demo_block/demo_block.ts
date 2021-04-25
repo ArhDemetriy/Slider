@@ -18,7 +18,7 @@ class Demo_block implements Destructible {
     // навешивание слушателей
     this.active.addEventListener('click', this.bindedAction)
   }
-  private action(this: HTMLElement, ev: Event){}
+  private action(ev: Event){}
   destroy() {
     this.active.removeEventListener('click', this.bindedAction)
   }
