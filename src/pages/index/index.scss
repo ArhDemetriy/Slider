@@ -1,2 +1,9 @@
+:root{
+  background-color: black;
+  color: green;
+}
 .index{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
