@@ -336,7 +336,7 @@ class WebpackConfig {
     const importsExprGenerators: ConstructorParameters<typeof AutoImportsPlugin>['0']['importsExprGenerators'] = new Map();
     importsExprGenerators.set('.pug', pugImportsExprGenerator);
     importsExprGenerators.set('.js', jsImportsExprGenerator);
-    importsExprGenerators.set('.ts', tsImportsExprGenerator);
+    // importsExprGenerators.set('.ts', tsImportsExprGenerator);
 
     return importsExprGenerators;
   }
@@ -358,8 +358,8 @@ class WebpackConfig {
 
     this.config.resolve.extensions = [
       '',
-      '.js',
       '.ts',
+      '.js',
       '.json',
     ]
   }
