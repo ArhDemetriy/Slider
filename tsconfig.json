@@ -2,7 +2,12 @@
   "compilerOptions": {
     "lib": ["es2020","ESNext","DOM"],
     "downlevelIteration": true,
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "paths": {
+      "baseType":["components/type"],
+      "simp/*": ["components/simple/*"],
+      "comp/*": ["components/complicated/*"]
+    }
   },
   "exclude": ["node_modules/*"]
 }

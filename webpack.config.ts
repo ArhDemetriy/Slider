@@ -343,8 +343,8 @@ class WebpackConfig {
 
   protected setResolve() {
     const alias = {
-      '@simple': path.resolve(__dirname, 'src/components/simple'),
-      '@complicated': path.resolve(__dirname, 'src/components/complicated'),
+      'simp': path.resolve(__dirname, 'src/components/simple'),
+      'comp': path.resolve(__dirname, 'src/components/complicated'),
       '@components': path.resolve(__dirname, 'src/components'),
       '@layouts': path.resolve(__dirname, 'src/layouts'),
       '@assets': path.resolve(__dirname, 'src/assets'),
@@ -355,6 +355,13 @@ class WebpackConfig {
     this.config.resolve = {
       alias,
     };
+
+    this.config.resolve.extensions = [
+      '',
+      '.js',
+      '.ts',
+      '.json',
+    ]
   }
 
   protected setOutput() {
