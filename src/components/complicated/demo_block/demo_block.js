@@ -1,1 +1,1 @@
-import './demo_block.scss';
+import './demo.scss';
