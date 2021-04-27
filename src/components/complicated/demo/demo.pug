@@ -1,4 +1,4 @@
-mixin demo_block(options = {}, items = [])
+mixin demo(options = {}, items = [])
   -
     items = items.concat(options.items);
     delete options.items;
@@ -12,8 +12,8 @@ mixin demo_block(options = {}, items = [])
     const title = options.title ? `${options.title}` : '';
     delete options.title;
 
-    options.class += ' demo_block' + (mod.length ? ` demo_block-${mod.join(` demo_block-`)} ` : '');
+    options.class += ' demo' + (mod.length ? ` demo-${mod.join(` demo-`)} ` : '');
 
   div()&attributes(options)&attributes(attributes)
-    .demo_block__item.controls
-    +slider({ class: 'demo_block__item' })
+    .demo__item.controls
+    +slider({ class: 'demo__item' })

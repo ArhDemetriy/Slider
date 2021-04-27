@@ -1,12 +1,12 @@
 import { Destructible } from '../../type'
 
-class Demo_block implements Destructible {
+class Demo implements Destructible {
   private readonly ElN: string // `.${this.ElN}-mod`
   private readonly selfElement: HTMLElement
   private readonly active: HTMLElement
 
   private readonly bindedAction = this.action.bind(this);
-  constructor(mainElement: HTMLElement, mainClass: string = 'demo_block') {
+  constructor(mainElement: HTMLElement, mainClass: string = 'demo') {
     this.ElN = mainClass
     // проверки на корретность компонента
     let temp = mainElement.querySelector(`.${this.ElN}__active`) as HTMLElement
@@ -25,5 +25,5 @@ class Demo_block implements Destructible {
 }
 
 export {
-  Demo_block,
+  Demo,
 }
