@@ -1,26 +1,30 @@
 import { Destructible } from '../../type'
 
 class Demo implements Destructible {
-  private readonly ElN: string // `.${this.ElN}-mod`
-  private readonly selfElement: HTMLElement
-  private readonly active: HTMLElement
+  protected readonly mainElement: HTMLElement
+  protected readonly controls: HTMLDivElement
+  protected readonly slider: HTMLElement
 
-  private readonly bindedAction = this.action.bind(this);
+  protected readonly destructible: Destructible[] = []
+
+  private readonly bindedEventListener = this.eventListener.bind(this);
   constructor(mainElement: HTMLElement, mainClass: string = 'demo') {
-    this.ElN = mainClass
-    // проверки на корретность компонента
-    let temp = mainElement.querySelector(`.${this.ElN}__active`) as HTMLElement
-    if (!temp) throw new ReferenceError(`not elem ".${this.ElN}__active" in tag: ${mainElement.tagName} class: ${mainElement.classList.toString}`)
-    this.active = temp
+    this.mainElement = mainElement
+    this.controls = mainElement.querySelector(`.${mainClass}__controls`)
+    this.slider = mainElement.querySelector(`.${mainClass}__slider`)
 
-    this.selfElement = mainElement
-
-    // навешивание слушателей
-    this.active.addEventListener('click', this.bindedAction)
+    this.initComponents()
   }
-  private action(ev: Event){}
+  protected initComponents() {
+
+  }
+  private eventListener(event: MouseEvent) {
+  }
+  protected addEventsListeners() {
+  }
   destroy() {
-    this.active.removeEventListener('click', this.bindedAction)
+
+    this.destructible.forEach(elem => elem.destroy())
   }
 }
 

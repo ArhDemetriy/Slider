@@ -15,5 +15,5 @@ mixin demo(options = {}, items = [])
     options.class += ' demo' + (mod.length ? ` demo-${mod.join(` demo-`)} ` : '');
 
   div()&attributes(options)&attributes(attributes)
-    .demo__item.controls
-    +slider({ class: 'demo__item' })
+    .demo__item.demo__controls
+    +slider({ class: 'demo__item demo__slider' })

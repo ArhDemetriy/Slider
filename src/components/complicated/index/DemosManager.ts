@@ -1,10 +1,13 @@
-import { Destructible } from 'components/type'
+import { Destructible } from 'baseType'
+import { Demo } from "comp/demo/demo";
 
 class DemosManager implements Destructible {
   protected readonly mainElement: HTMLElement
   protected readonly addButton: HTMLButtonElement
   protected readonly template: HTMLTemplateElement
   protected readonly listDemos: HTMLDivElement
+
+  protected readonly destructible: Destructible[] = []
 
   private readonly bindedAddNewDemo = this.addNewDemo.bind(this);
   constructor(mainElement: HTMLElement, mainClass: string = 'index') {
@@ -17,8 +20,7 @@ class DemosManager implements Destructible {
   }
   private addNewDemo(event: MouseEvent) {
     const clone = document.importNode(this.template.content, true)
-    const nevSlider = clone.querySelector<HTMLDivElement>('.slider')
-
+    this.destructible.push(new Demo(clone as unknown as HTMLDivElement))
     this.listDemos.appendChild(clone)
   }
   protected addEventsListeners() {
@@ -26,6 +28,8 @@ class DemosManager implements Destructible {
   }
   destroy() {
     this.addButton.removeEventListener('click', this.bindedAddNewDemo)
+
+    this.destructible.forEach(elem => elem.destroy())
   }
 }
 
