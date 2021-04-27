@@ -1,26 +1,31 @@
 import { Destructible } from 'components/type'
 
 class Index implements Destructible {
-  private readonly ElN: string // `.${this.ElN}-mod`
-  private readonly selfElement: HTMLElement
-  private readonly active: HTMLElement
+  protected readonly mainElement: HTMLElement
+  protected readonly addButton: HTMLButtonElement
+  protected readonly template: HTMLTemplateElement
+  protected readonly listDemos: HTMLDivElement
 
-  private readonly bindedAction = this.action.bind(this);
+  private readonly bindedAddNewDemo = this.addNewDemo.bind(this);
   constructor(mainElement: HTMLElement, mainClass: string = 'index') {
-    this.ElN = mainClass
-    // проверки на корретность компонента
-    let temp = mainElement.querySelector(`.${this.ElN}__active`) as HTMLElement
-    if (!temp) throw new ReferenceError(`not elem ".${this.ElN}__active" in tag: ${mainElement.tagName} class: ${mainElement.classList.toString}`)
-    this.active = temp
+    this.mainElement = mainElement
+    this.addButton = mainElement.querySelector(`.${mainClass}__button--add_template`)
+    this.template = mainElement.querySelector(`.${mainClass}__template`)
+    this.listDemos = mainElement.querySelector(`.${mainClass}__list_demo`)
 
-    this.selfElement = mainElement
-
-    // навешивание слушателей
-    this.active.addEventListener('click', this.bindedAction)
+    this.addEventsListeners()
   }
-  private action(this: HTMLElement, ev: Event){}
+  private addNewDemo(event: MouseEvent) {
+    const clone = document.importNode(this.template.content, true)
+    const nevSlider = clone.querySelector<HTMLDivElement>('.slider')
+
+    this.listDemos.appendChild(clone)
+  }
+  protected addEventsListeners() {
+    this.addButton.addEventListener('click', this.bindedAddNewDemo)
+  }
   destroy() {
-    this.active.removeEventListener('click', this.bindedAction)
+    this.addButton.removeEventListener('click', this.bindedAddNewDemo)
   }
 }
 

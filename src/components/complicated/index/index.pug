@@ -5,7 +5,7 @@ mixin index(options = {}, items = [])
     delete options.items;
     options.class = options.class || ''
 
-    const mod = ((mod = '')=> new Set( mod.trim().split(/[,\s]\s*/) ))(options.mod)
+    const mod = ((mod = '') => new Set( mod.trim().split(/[,\s]\s*/) ))(options.mod)
     delete options.mod;
     // if (mod.includes('dropable'))
     const text = options.text ? `${options.text}` : 'add new slider';
@@ -13,7 +13,13 @@ mixin index(options = {}, items = [])
     const title = options.title ? `${options.title}` : '';
     delete options.title;
 
-    options.class += ' index index__js' + (mod.length ? ` index-${mod.join(` index-`)} ` : '');
+    if (options.class)
+      options.class +=  ' index index__js'
+    else
+      options.class =  'index index__js'
+
+    if (mod.length)
+      options.class +=  ` index-${mod.join(` index-`)}`
 
   div()&attributes(options)&attributes(attributes)
     .index__list_demo
