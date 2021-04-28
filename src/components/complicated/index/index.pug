@@ -2,7 +2,6 @@ mixin index(options = {}, items = [])
   -
     items = items.concat(options.items);
     delete options.items;
-    options.class = options.class || ''
 
     const mod = ((mod = '') => new Set( mod.trim().split(/[,\s]\s*/) ))(options.mod)
     delete options.mod;

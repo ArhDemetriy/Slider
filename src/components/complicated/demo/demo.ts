@@ -1,4 +1,4 @@
-import { Destructible } from '../../type'
+import { Destructible } from 'baseType'
 import { Slider } from "simp/slider/slider";
 
 class Demo implements Destructible {

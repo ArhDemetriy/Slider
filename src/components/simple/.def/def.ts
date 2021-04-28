@@ -1,26 +1,22 @@
-import { Destructible } from '../../type'
+import { Destructible } from 'baseType'
 
 class Def implements Destructible {
-  private readonly ElN: string // `.${this.ElN}-mod`
-  private readonly selfElement: HTMLElement
-  private readonly active: HTMLElement
-
-  private readonly bindedAction = this.action.bind(this);
-  constructor(mainElement: HTMLElement, mainClass: string = 'def') {
-    this.ElN = mainClass
-    // проверки на корретность компонента
-    let temp = mainElement.querySelector(`.${this.ElN}__active`) as HTMLElement
-    if (!temp) throw new ReferenceError(`not elem ".${this.ElN}__active" in tag: ${mainElement.tagName} class: ${mainElement.classList.toString}`)
-    this.active = temp
-
-    this.selfElement = mainElement
-
-    // навешивание слушателей
-    this.active.addEventListener('click', this.bindedAction)
-  }
-  private action(this: HTMLElement, ev: Event){}
   destroy() {
-    this.active.removeEventListener('click', this.bindedAction)
+    this.mainElement.removeEventListener('click', this.bindedEventListener)
+  }
+  protected readonly mainElement: HTMLElement
+
+  private readonly bindedEventListener = this.eventListener.bind(this)
+
+  constructor(mainElement: HTMLElement, mainClass: string = 'def') {
+    this.mainElement = mainElement
+
+    this.addEventsListeners()
+  }
+  private eventListener(event: MouseEvent) {
+  }
+  protected addEventsListeners() {
+    this.mainElement.addEventListener('click', this.bindedEventListener)
   }
 }
 
