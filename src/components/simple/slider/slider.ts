@@ -1,6 +1,14 @@
 import { Destructible } from '../../type'
 
 class Slider implements Destructible {
+  moveRight() {
+    this.moveBar(5)
+  }
+  moveLeft() {
+    this.moveBar(-5)
+  }
+
+
   protected readonly mainElement: HTMLElement
 
   protected readonly destructible: Destructible[] = []
@@ -21,6 +29,12 @@ class Slider implements Destructible {
   }
   protected addEventsListeners() {
     this.mainElement.addEventListener('click',this.bindedEventListener)
+  }
+  protected moveBar(x: number) {
+
+    const barPosition = this.mainElement.style.getPropertyValue('--barPosition')
+    console.log(barPosition);
+
   }
   destroy() {
     this.mainElement.removeEventListener('click',this.bindedEventListener)

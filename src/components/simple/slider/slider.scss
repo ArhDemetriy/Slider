@@ -1,5 +1,24 @@
 .slider{
-  height: 40px;
-  width: 60px;
-  background-color: palegreen;
+  --rowWeight: 512px;
+  --barSize: 10px;
+  --barPosition: 30;
+  position: relative;
+
+  height: var(--barSize);
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 20px;
+  &__row{
+    background-color: palegreen;
+    height: 5px;
+    width: var(--rowWeight);
+  }
+  &__bar{
+    height: var(--barSize);
+    width: var(--barSize);
+    left: calc( var(--barPosition)*1% - var(--barSize)/2 );
+    background-color: darkorchid;
+    position: absolute;
+  }
 }

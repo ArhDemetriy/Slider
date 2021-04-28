@@ -16,4 +16,6 @@ mixin demo(options = {}, items = [])
 
   div()&attributes(options)&attributes(attributes)
     .demo__item.demo__controls
+      button.demo__left_button(type='button') move left
+      button.demo__right_button(type='button') move right
     +slider({ class: 'demo__item demo__slider' })
