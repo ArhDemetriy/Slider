@@ -1,18 +1,20 @@
 mixin def(options = {}, items = [])
   -
-    const items = (options.items || []).concat(items);
-    delete options.items;
-
-    options.class = `def `.concat(options.class || '');
-    const mod = ((mod = '')=> new Set( mod.trim().split(/[,\s]\s*/) ))(options.mod)
-    delete options.mod;
+    items = items.concat(options.items)
+    delete options.items
+    const mod = ((mod = '') => new Set( mod.trim().split(/[,\s]\s*/) ))(options.mod)
+    delete options.mod
     // if (mod.includes('dropable'))
-    const text = options.text ? `${options.text}` : '';
-    delete options.text;
-    const title = options.title ? `${options.title}` : '';
-    delete options.title;
+    const text = options.text ? `${options.text}` : ''
+    delete options.text
 
-    options.class += mod.length ? ` def-${mod.join(` def-`)} ` : '';
+    // generate classes
+    if (options.class)
+      options.class += ' def def__js'
+    else
+      options.class = 'def def__js'
+    if (mod.length)
+      options.class += ` def-${mod.join(` def-`)}`
 
   div()&attributes(options)&attributes(attributes)
-    +foo()
+    +foo({ class: 'def__item' })
