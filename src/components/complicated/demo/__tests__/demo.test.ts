@@ -1,17 +1,20 @@
 import { mockModule } from 'jest-mock-implementations-preserving'
-import { Def } from '../def'
+import { Demo } from '../demo'
 
-jest.mock('../def.ts', () => mockModule<{ Def, }>(jest.requireActual('../def.ts'), {
-  Def: {
+jest.mock('../demo.ts', function (this: Demo) {
+  return mockModule<{ Demo: typeof Demo }>(jest.requireActual('../demo.ts'), {
+    Demo: {
+    }
+  })
+})
 
-  },
-}))
-describe('class Def:', function (this: Def) {
-  let def: Def
+describe('class Demo:', function (this: Demo) {
+
+  let demo: Demo
   beforeEach(() => {
 
   })
   it('should toBe ', () => {
-    expect(Def).toBeDefined()
+    expect(Demo).toBeDefined()
   })
 })
