@@ -1,0 +1,19 @@
+mixin demo(options = {}, items = [])
+  -
+    items = items.concat(options.items);
+    delete options.items;
+    options.class = options.class || ''
+
+    const mod = ((mod = '')=> new Set( mod.trim().split(/[,\s]\s*/) ))(options.mod)
+    delete options.mod;
+    // if (mod.includes('dropable'))
+    const text = options.text ? `${options.text}` : '';
+    delete options.text;
+    const title = options.title ? `${options.title}` : '';
+    delete options.title;
+
+    options.class += ' demo' + (mod.length ? ` demo-${mod.join(` demo-`)} ` : '');
+
+  div()&attributes(options)&attributes(attributes)
+    .demo__item.demo__controls
+    +slider({ class: 'demo__item demo__slider' })

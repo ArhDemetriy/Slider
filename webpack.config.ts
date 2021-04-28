@@ -336,15 +336,15 @@ class WebpackConfig {
     const importsExprGenerators: ConstructorParameters<typeof AutoImportsPlugin>['0']['importsExprGenerators'] = new Map();
     importsExprGenerators.set('.pug', pugImportsExprGenerator);
     importsExprGenerators.set('.js', jsImportsExprGenerator);
-    importsExprGenerators.set('.ts', tsImportsExprGenerator);
+    // importsExprGenerators.set('.ts', tsImportsExprGenerator);
 
     return importsExprGenerators;
   }
 
   protected setResolve() {
     const alias = {
-      '@simple': path.resolve(__dirname, 'src/components/simple'),
-      '@complicated': path.resolve(__dirname, 'src/components/complicated'),
+      'simp': path.resolve(__dirname, 'src/components/simple'),
+      'comp': path.resolve(__dirname, 'src/components/complicated'),
       '@components': path.resolve(__dirname, 'src/components'),
       '@layouts': path.resolve(__dirname, 'src/layouts'),
       '@assets': path.resolve(__dirname, 'src/assets'),
@@ -355,6 +355,13 @@ class WebpackConfig {
     this.config.resolve = {
       alias,
     };
+
+    this.config.resolve.extensions = [
+      '',
+      '.ts',
+      '.js',
+      '.json',
+    ]
   }
 
   protected setOutput() {
