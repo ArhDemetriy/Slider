@@ -12,6 +12,11 @@ mixin slider(options = {}, items = [])
     const title = options.title ? `${options.title}` : '';
     delete options.title;
 
-    options.class += ' slider' + (mod.length ? ` slider-${mod.join(` slider-`)} ` : '');
+    if (options.class)
+      options.class +=  ' slider slider__js'
+    else
+      options.class =  ' slider slider__js'
+    if (mod.length)
+      options.class +=  ` slider-${mod.join(` slider-`)}`
 
   div()&attributes(options)&attributes(attributes)

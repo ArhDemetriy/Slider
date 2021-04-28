@@ -1,4 +1,5 @@
 import { Destructible } from '../../type'
+import { Slider } from "simp/slider/slider";
 
 class Demo implements Destructible {
   protected readonly mainElement: HTMLElement
@@ -16,14 +17,13 @@ class Demo implements Destructible {
     this.initComponents()
   }
   protected initComponents() {
-
+    this.destructible.push(new Slider(this.slider))
   }
   private eventListener(event: MouseEvent) {
   }
   protected addEventsListeners() {
   }
   destroy() {
-
     this.destructible.forEach(elem => elem.destroy())
   }
 }
