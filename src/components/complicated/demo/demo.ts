@@ -38,8 +38,8 @@ class Demo implements Destructible {
   }
 
   protected addEventsListeners() {
-    this.leftButton.addEventListener('click',this.bindedMoveLeftEvent)
-    this.rightButton.addEventListener('click',this.bindedMoveRightEvent)
+    this.leftButton.addEventListener('click',this.bindedMoveLeftEvent, { passive: true })
+    this.rightButton.addEventListener('click',this.bindedMoveRightEvent, { passive: true })
   }
   destroy() {
     this.leftButton.removeEventListener('click',this.bindedMoveLeftEvent)

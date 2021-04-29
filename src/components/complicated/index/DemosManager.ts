@@ -24,7 +24,7 @@ class DemosManager implements Destructible {
     this.listDemos.appendChild(clone)
   }
   protected addEventsListeners() {
-    this.addButton.addEventListener('click', this.bindedAddNewDemo)
+    this.addButton.addEventListener('click', this.bindedAddNewDemo, { passive: true })
   }
   destroy() {
     this.addButton.removeEventListener('click', this.bindedAddNewDemo)

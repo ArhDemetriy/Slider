@@ -16,7 +16,7 @@ class Def implements Destructible {
   private eventListener(event: MouseEvent) {
   }
   protected addEventsListeners() {
-    this.mainElement.addEventListener('click', this.bindedEventListener)
+    this.mainElement.addEventListener('click', this.bindedEventListener, { passive: true })
   }
 }
 
