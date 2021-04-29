@@ -8,38 +8,53 @@ class Slider implements Destructible {
     this.moveBar(-5)
   }
 
-
   protected readonly mainElement: HTMLElement
+  protected readonly bar: HTMLDivElement
 
   protected readonly destructible: Destructible[] = []
-  private iterator = 0
 
-  private readonly bindedEventListener = this.eventListener.bind(this);
+  private _barPosition = 0
+  protected get barPosition() {
+    return this._barPosition
+  }
+  protected set barPosition(x) {
+    this._barPosition = x
+    this.mainElement.style.setProperty('--barPosition', this._barPosition.toString())
+  }
+  protected readonly bindedMouseDown = this.mouseDown.bind(this)
   constructor(mainElement: HTMLElement, mainClass: string = 'slider') {
     this.mainElement = mainElement
-
+    this.bar = this.mainElement.querySelector(`.${mainClass}__bar`)
     this.initComponents()
     this.addEventsListeners()
   }
   protected initComponents() {
-
-  }
-  private eventListener(event: MouseEvent) {
-    alert(this.iterator++)
+    this.mainElement.style.setProperty('--barPosition', this.barPosition.toString())
   }
   protected addEventsListeners() {
-    this.mainElement.addEventListener('click',this.bindedEventListener)
+    this.mainElement.addEventListener('mousedown', this.bindedMouseDown, { passive: true })
   }
   protected moveBar(x: number) {
-
-    const barPosition = this.mainElement.style.getPropertyValue('--barPosition')
-    console.log(barPosition);
-
+    this.barPosition += x
   }
   destroy() {
-    this.mainElement.removeEventListener('click',this.bindedEventListener)
-
+    this.mainElement.removeEventListener('mousedown', this.bindedMouseDown)
     this.destructible.forEach(elem => elem.destroy())
+  }
+
+  protected mouseDown(ev: MouseEvent) {
+    console.log('***********');
+    const local = ev.offsetX
+    console.log(local);
+    const w = window.getComputedStyle(this.mainElement).width
+    console.log(w);
+    console.log($(this.mainElement).css('--barPosition'));
+
+
+
+
+
+
   }
 }
 

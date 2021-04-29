@@ -1,18 +1,19 @@
 .slider{
-  --rowWeight: 512px;
+  --rowWidth: 512px;
   --barSize: 10px;
-  --barPosition: 30;
+  --barPosition: 0;
   position: relative;
 
   height: var(--barSize);
   display: flex;
   align-items: center;
 
-  margin-bottom: 20px;
+  width: 600px;
+
   &__row{
     background-color: palegreen;
     height: 5px;
-    width: var(--rowWeight);
+    width: 100%;
   }
   &__bar{
     height: var(--barSize);
