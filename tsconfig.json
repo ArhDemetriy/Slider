@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["es2020","ESNext","DOM"],
+    "target": "ESNext",
     "downlevelIteration": true,
     "baseUrl": "./src",
     "paths": {
