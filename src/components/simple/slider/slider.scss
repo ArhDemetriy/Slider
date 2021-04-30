@@ -11,15 +11,25 @@
   width: 600px;
 
   &__row{
-    background-color: palegreen;
+    background:
+    linear-gradient(to right,
+      skyblue calc( var(--barPosition, 0) * 1% ),
+      blue calc( var(--barPosition, 0) * 1% ),
+      blue 66%,
+      skyblue 66%);
     height: 5px;
     width: 100%;
+    border-radius: 50vh;
   }
   &__bar{
     height: var(--barSize);
     width: var(--barSize);
     left: calc( var(--barPosition)*1% - var(--barSize)/2 );
+    border: 2px wheat solid;
+    border-radius: 50vh;
+
     background-color: darkorchid;
+
     position: absolute;
   }
 }
