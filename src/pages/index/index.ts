@@ -1,5 +1,5 @@
-import { Destructible } from "components/type";
-import { indexes } from "comp/index/index";
+import { Destructible } from 'components/type';
+import { indexes } from 'comp/index/index';
 
-const actives: Destructible[][] = []
-actives.push(indexes)
+const actives: Destructible[][] = [];
+actives.push(indexes);
