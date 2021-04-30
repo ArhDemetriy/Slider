@@ -13,11 +13,32 @@
     display: flex;
     justify-content: space-evenly; }
 
+.demo {
+  display: flex;
+  gap: 10px; }
+  .demo__controls {
+    display: flex;
+    gap: 5px; }
 
 .slider {
-  height: 40px;
-  width: 60px;
-  background-color: palegreen; }
+  --rowWidth: 512px;
+  --barSize: 10px;
+  --barPosition: 0;
+  position: relative;
+  height: var(--barSize);
+  display: flex;
+  align-items: center;
+  width: 600px; }
+  .slider__row {
+    background-color: palegreen;
+    height: 5px;
+    width: 100%; }
+  .slider__bar {
+    height: var(--barSize);
+    width: var(--barSize);
+    left: calc( var(--barPosition)*1% - var(--barSize)/2);
+    background-color: darkorchid;
+    position: absolute; }
 
 :root {
   background-color: black;
