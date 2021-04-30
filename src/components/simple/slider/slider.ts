@@ -100,4 +100,6 @@ class Slider implements Destructible {
   }
 }
 
-export default Slider;
+export {
+  Slider
+};
