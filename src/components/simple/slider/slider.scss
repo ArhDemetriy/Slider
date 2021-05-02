@@ -21,6 +21,11 @@
     width: 100%;
     border-radius: 50vh;
   }
+  &__scale{
+    height: 20px;
+    width: 100%;
+    background-color: grey;
+  }
   &__bar{
     height: var(--barSize);
     width: var(--barSize);
