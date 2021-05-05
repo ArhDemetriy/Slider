@@ -60,10 +60,6 @@
 
     display: flex;
     justify-content: space-between;
-    &-numeric{
-      counter-reset: mark calc(var(--min));
-      --step: calc( (var(--max) - var(--min)) / calc(var(--count, 2) - 1));
-    }
   }
   &__mark{
     position: relative;
@@ -84,27 +80,15 @@
       &::before{
         left: 0;
       }
-      &_numeric::before{
-        counter-reset: start_mark var(--min);
-        content: counter(start_mark);
-      }
     }
     &-middle{
       &::before{
         transform: translateX(-50%);
       }
-      &_numeric::before{
-        counter-increment: mark var(--step);
-        content: counter(mark);
-      }
     }
     &-end{
       &::before{
         right: 0;
-      }
-      &_numeric::before{
-        counter-reset: end_mark var(--max);
-        content: counter(end_mark);
       }
     }
   }
