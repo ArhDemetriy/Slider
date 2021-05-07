@@ -2,34 +2,94 @@
   --rowWidth: 512px;
   --barSize: 10px;
   --barPosition: 0;
+  --barPositionText: '0%';
+
+  --min: 0;
+  --max: 108;
+  --count: 7;
+
   position: relative;
 
   height: var(--barSize);
   display: flex;
+  flex-direction: column;
   align-items: center;
 
   width: 600px;
-
+  min-height: 60px;
+  margin: 30px 0;
   &__row{
     background:
-    linear-gradient(to right,
-      skyblue calc( var(--barPosition, 0) * 1% ),
-      blue calc( var(--barPosition, 0) * 1% ),
-      blue 66%,
-      skyblue 66%);
+      linear-gradient(to right,
+        skyblue calc( var(--barPosition, 0) * 1% ),
+        blue calc( var(--barPosition, 0) * 1% ),
+        blue 66%,
+        skyblue 66%);
+
+    box-sizing: border-box;
     height: 5px;
     width: 100%;
     border-radius: 50vh;
+    border: solid 1px red;
+
+    display: flex;
+    align-items: center;
   }
   &__bar{
+    position: relative;
+    left: calc( var(--barPosition)*1% - var(--barSize)/2 );
+
+    box-sizing: border-box;
     height: var(--barSize);
     width: var(--barSize);
-    left: calc( var(--barPosition)*1% - var(--barSize)/2 );
     border: 2px wheat solid;
+    background-color: darkorchid;
     border-radius: 50vh;
 
-    background-color: darkorchid;
+    &:hover, &:focus, &-moving{
+      &::before{
+        content: var(--barPositionText);
+        position: absolute;
+        top: 3rem;
+      }
+    }
+  }
+  &__scale{
+    width: 100%;
+    margin-bottom: 10px;
 
-    position: absolute;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__mark{
+    position: relative;
+    &::before{
+      position: absolute;
+      bottom: 0;
+      content: attr(data-content);
+    }
+    &::after{
+      position: absolute;
+      top: 0;
+      background-color: yellowgreen;
+      width: 1px;
+      height: 4px;
+      content: '';
+    }
+    &-start{
+      &::before{
+        left: 0;
+      }
+    }
+    &-middle{
+      &::before{
+        transform: translateX(-50%);
+      }
+    }
+    &-end{
+      &::before{
+        right: 0;
+      }
+    }
   }
 }

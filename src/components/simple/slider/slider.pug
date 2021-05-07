@@ -20,6 +20,15 @@ mixin slider(options = {}, items = [])
       options.class +=  ` slider-${mod.join(` slider-`)}`
 
   div()&attributes(options)&attributes(attributes)
-    .slider__bar
+    .slider__scale.slider__scale-numeric
+      .slider__mark.slider__mark-start.slider__mark-start_numeric
+      .slider__mark.slider__mark-middle.slider__mark-middle_numeric
+      .slider__mark.slider__mark-middle.slider__mark-middle_numeric
+      .slider__mark.slider__mark-middle.slider__mark-middle_numeric
+      .slider__mark.slider__mark-middle.slider__mark-middle_numeric
+      .slider__mark.slider__mark-middle.slider__mark-middle_numeric
+      .slider__mark.slider__mark-end.slider__mark-end_numeric
     .slider__row
+      .slider__bar
+
 
