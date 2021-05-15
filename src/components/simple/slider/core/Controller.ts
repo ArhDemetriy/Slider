@@ -20,19 +20,17 @@ class Controller<Count extends (1 | 2), T extends number | string = number> {
   constructor(settings: ControllerSettings<Count, T>) {
   }
   public getStartPosition() {
-
   }
   public getPositions() {
     return [this.getStartPosition()]
   }
-  public getEndPosition(): Count extends 1 ? T : Error {
+  public getEndPosition(): Count extends 1 ? Error : T {
     throw new TypeError('')
   }
   protected model: Count extends 1 ? Model<T> : Model2<T>
   protected view: Count extends 1 ? View<T> : View<T>
   protected initOneBar() { }
   protected initTwoBar() { }
-
 }
 
 export {
