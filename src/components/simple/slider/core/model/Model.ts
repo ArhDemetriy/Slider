@@ -1,7 +1,7 @@
 interface ModelSettings<T>{
   min: T
   max: T
-  initStartPosition: T
+  initPositions: [T]
 }
 class Model<T> {
   constructor(settings: ModelSettings<T>) {
