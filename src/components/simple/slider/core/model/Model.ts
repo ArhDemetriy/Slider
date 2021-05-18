@@ -9,6 +9,9 @@ class Model<T> {
   setStartPosition(requestedPosition: T): T {
     return this.startPosition = requestedPosition
   }
+  getSetters(): [Model<T>['setStartPosition']] {
+    return [this.setStartPosition.bind(this)]
+  }
   protected min: T
   protected max: T
   protected startPosition: T
