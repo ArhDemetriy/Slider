@@ -1,6 +1,6 @@
 import { Destructible } from "baseType";
 
-import { HTMLElementBase } from "../HTMLElementBase";
+import { HTMLElementBase } from "../../HTMLElementBase";
 class Scale extends HTMLElementBase<HTMLDivElement> implements Destructible{
   constructor(settings: { [k in string]: any }) {
     super(settings.mainElement)

@@ -1,5 +1,5 @@
 import { Destructible } from "baseType";
-import { HTMLElementBase, HTMLElementBaseSettings } from "./HTMLElementBase";
+import { HTMLElementBase, HTMLElementBaseSettings } from "../HTMLElementBase";
 import { Bar } from "./bars/Bar";
 import { Scale } from "./scale/Scale";
 interface ViewSettings<T> extends HTMLElementBaseSettings<HTMLDivElement> {

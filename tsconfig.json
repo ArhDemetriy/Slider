@@ -8,6 +8,7 @@
     "baseUrl": "./src",
     "paths": {
       "baseType":["components/type"],
+      "HTMLElementBase":["components/simple/slider/core/HTMLElementBase"],
       "simp/*": ["components/simple/*"],
       "comp/*": ["components/complicated/*"]
     }

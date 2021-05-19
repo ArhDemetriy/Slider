@@ -1,11 +1,11 @@
 import { XOR } from "baseType";
-import { HTMLElementBaseSettings } from "./view/HTMLElementBase";
+import { HTMLElementBaseSettings, ClassHTMLElementBaseSettings } from "HTMLElementBase";
 import { Model, ModelSettings } from "./model/Model";
 import { Model2, Model2Settings } from "./model/Model2";
 import { View, ViewSettings } from "./view/View";
 import { View2, View2Settings } from "./view/View2";
 
-interface ControllerSettings<Count extends (1 | 2), T extends number> extends HTMLElementBaseSettings<HTMLDivElement> {
+interface ControllerSettings<Count extends (1 | 2), T extends number> extends ClassHTMLElementBaseSettings<HTMLDivElement> {
   min: T
   max: T
   count: 2

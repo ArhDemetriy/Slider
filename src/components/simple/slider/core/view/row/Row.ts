@@ -1,8 +1,8 @@
 import { Destructible } from "baseType";
-import { HTMLElementBase, HTMLElementBaseSettings } from "../HTMLElementBase";
-interface RowSettings extends HTMLElementBaseSettings<HTMLDivElement> {
+import { ClassHTMLElementBase, ClassHTMLElementBaseSettings } from "HTMLElementBase";
+interface RowSettings extends ClassHTMLElementBaseSettings<HTMLDivElement> {
 }
-class Row extends HTMLElementBase<HTMLDivElement> {
+class Row extends ClassHTMLElementBase<HTMLDivElement> {
   constructor(settings: RowSettings) {
     super(settings)
     this.row = document.createElement('div')

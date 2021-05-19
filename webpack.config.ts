@@ -1,17 +1,17 @@
 /** @type {import('node')} */
 import {
-  Configuration, RuleSetRule, RuleSetUseItem, ProvidePlugin,
+  Configuration, RuleSetRule, RuleSetUseItem, ProvidePlugin, ModuleOptions
 } from 'webpack';
 import { readdirSync } from 'fs';
 
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import { AutoImportsPlugin } from 'auto-imports-plugin';
 
-import path = require('path');
-import HTMLWebpackPlugin = require('html-webpack-plugin');
-import MiniCssExtractPlugin = require('mini-css-extract-plugin');
-import OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
-import TerserWebpackPlugin = require('terser-webpack-plugin');
+import * as path from 'path';
+import * as HTMLWebpackPlugin from 'html-webpack-plugin';
+import { MiniCssExtractPlugin } from 'mini-css-extract-plugin';
+import { OptimizeCssAssetsWebpackPlugin } from 'optimize-css-assets-webpack-plugin';
+import { TerserWebpackPlugin } from 'terser-webpack-plugin';
 
 /**
  * generate Configuration.module
@@ -29,7 +29,7 @@ class WebpackConfigModule {
 
   private readonly module: Configuration['module'] = { rules: [] };
 
-  protected readonly rules: Configuration['module']['rules'] = this.module.rules;
+  protected readonly rules: NonNullable<ModuleOptions['rules']> = this.module!.rules!;
 
   protected readonly importJsonFileName: string = 'imports';
 
@@ -76,11 +76,8 @@ class WebpackConfigModule {
     const jsRule: RuleSetRule = {};
     jsRule.test = /\.m?js$/;
     jsRule.exclude = /node_modules/;
-    const use: {
-      ident?: string
-      loader?: string
-      options?: string | { [index: string]: any }
-    } = {
+
+    const use: RuleSetRule['use'] & { options: { presets: string[] } } = {
       loader: 'babel-loader',
       options: {
         presets: ['@babel/preset-env'],
@@ -97,13 +94,10 @@ class WebpackConfigModule {
   protected setTsRule() {
     const tsRule: RuleSetRule = this.getJsRule();
     tsRule.test = /\.ts$/;
-    (tsRule.use as {
-      ident?: string
-      loader?: string
-      options?: { presets: string[], [index: string]: any }
-    }).options.presets.push(
-      '@babel/preset-typescript',
-    );
+    (tsRule.use as RuleSetRule['use'] & { options: { presets: string[] } })
+      .options.presets.push(
+        '@babel/preset-typescript',
+      );
     this.rules.push(tsRule);
   }
 
@@ -201,8 +195,8 @@ class WebpackConfig {
 
   protected getIsDev() {
     const ENV = process.env.NODE_ENV === 'development';
-    const serve = process.env.npm_lifecycle_event.toLocaleLowerCase().includes('serve');
-    const watch = process.env.npm_lifecycle_event.toLocaleLowerCase().includes('watch');
+    const serve = process.env.npm_lifecycle_event!.toLocaleLowerCase().includes('serve');
+    const watch = process.env.npm_lifecycle_event!.toLocaleLowerCase().includes('watch');
     return ENV || serve || watch;
   }
 
@@ -211,7 +205,7 @@ class WebpackConfig {
   }
 
   protected setServe() {
-    if (!process.env.npm_lifecycle_event.toLocaleLowerCase().includes('serve')) return;
+    if (!process.env.npm_lifecycle_event!.toLocaleLowerCase().includes('serve')) return;
     if (!this.isDev) return;
 
     this.config.watch = false;
@@ -293,8 +287,8 @@ class WebpackConfig {
   protected getCleanWebpackPlugin() {
     const options: ConstructorParameters<typeof CleanWebpackPlugin>[0] = {};
 
-    const serve = process.env.npm_lifecycle_event.toLocaleLowerCase().includes('serve');
-    const watch = process.env.npm_lifecycle_event.toLocaleLowerCase().includes('watch');
+    const serve = process.env.npm_lifecycle_event!.toLocaleLowerCase().includes('serve');
+    const watch = process.env.npm_lifecycle_event!.toLocaleLowerCase().includes('watch');
     if (serve || watch) {
       options.cleanStaleWebpackAssets = false;
     }
@@ -308,7 +302,7 @@ class WebpackConfig {
   }
 
   protected setPlugins() {
-    this.config.plugins = [].concat(
+    this.config.plugins = ([] as any[]).concat(
       new MiniCssExtractPlugin({
         filename: `styles/[name]${this.isDev ? '' : '.[contenthash]'}.css`,
       }),
@@ -318,7 +312,6 @@ class WebpackConfig {
         jQuery: 'jQuery',
       }),
       this.getHTMLWebpackPluginsForAllPages(),
-
       new AutoImportsPlugin({
         sources: ['src/components/complicated', 'src/components/simple'],
         startDirs: this.pages.map((dirName) => path.join('src/pages', dirName)),
