@@ -18,7 +18,7 @@ class Controller<Count extends 2, T extends number = number> {
   constructor(settings: ControllerSettings<Count, T>) {
     this.s = settings
     this.initModel()
-    this.modelSetters = this.model.getSetters()
+    this.setters = this.createSetters()
     this.initView()
   }
   // public
@@ -32,7 +32,8 @@ class Controller<Count extends 2, T extends number = number> {
   // values
   protected readonly s: ControllerSettings<Count, T>
   protected model: Model2<T>
-  protected readonly modelSetters: ReturnType<Model2<T>['getSetters']>
+  protected readonly setters: ConstructorParameters<typeof View2>[1]
+
   protected view: View2<T>
   // methods
 
@@ -58,11 +59,17 @@ class Controller<Count extends 2, T extends number = number> {
     this.model = new Model2(this.s)
     this.s.initPositions = this.model.getPositions()
   }
-  private initView() {
-    // this.view = new View(this.s)
+  private createSetters() {
+    return this.model.getSetters().map(setter => {
+      // эта функция вешается на mouseMove, потому должна быть быстрой
+      return (function (this: Controller<Count, T>, requestedPercent: number) {
+        return this.normalization(setter(this.undoNormalization(requestedPercent)))
+      }).bind(this) as (requestedPercent: number) => number
+    }) as ConstructorParameters<typeof View2>[1]
   }
-
-
+  private initView() {
+    this.view = new View2(this.s, this.setters)
+  }
 }
 
 export {
