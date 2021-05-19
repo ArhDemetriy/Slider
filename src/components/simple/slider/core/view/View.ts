@@ -14,10 +14,9 @@ class View<T> extends HTMLElementBase<HTMLDivElement> implements Destructible{
     super(settings)
   }
   destroy() {
-    this.bar.destroy()
     this.scale.destroy()
   }
-  protected bar: Bar<T>
+  protected bar: Bar
   protected scale: Scale
 }
 
